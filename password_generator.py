@@ -32,5 +32,3 @@ if __name__ == "__main__":
     fen.resizable(False, False)
     interface(fen)
     fen.mainloop()
-
-
