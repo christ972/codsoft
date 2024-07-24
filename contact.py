@@ -1,8 +1,8 @@
 import uuid
+
 class Contact:
-    def __init__(self,id, store_name, phone_number, email, address):
-        
-        self.id=id
+    def __init__(self, id, store_name, phone_number, email, address):
+        self.id = id
         self.store_name = store_name
         self.phone_number = phone_number
         self.email = email
@@ -16,19 +16,21 @@ class Contact:
 
     def __repr__(self):
         return f"ID: {self.id} | Store Name: {self.store_name} | Phone: {self.phone_number} | Email: {self.email} | Address: {self.address}"
+
 contacts = []
-id=0
+id_counter = 0
+
 def add_contact():
-    global id
-    id+=1
+    global id_counter
+    id_counter += 1
     store_name = input("Enter store name: ")
     phone_number = input("Enter phone number: ")
     email = input("Enter email: ")
     address = input("Enter address: ")
-    contact = Contact(id,store_name, phone_number, email, address)
+    contact = Contact(id_counter, store_name, phone_number, email, address)
     contacts.append(contact)
     print("Contact added successfully!")
-    
+
 def view_contacts():
     if contacts:
         print("\nContact List:")
@@ -48,24 +50,22 @@ def search_contacts():
         print("No contacts found.")
 
 def update_contact():
-    contact_id = input("Enter the contact ID to update: ")
-    global contacts
-
-    contacts = [contact for contact in contacts if contact.id == contact_id]
-    if contacts!=None:
-        store_name = input("Enter new store name: ")
-        phone_number = input("Enter new phone number: ")
-        email = input("Enter new email: ")
-        address = input("Enter new address: ")
-        contact.update(store_name, phone_number, email, address)
-        print("Contact updated successfully!")
-    else:
-        print("Contact not found.")
+    contact_id = int(input("Enter the contact ID to update: "))
+    for contact in contacts:
+        if contact.id == contact_id:
+            store_name = input("Enter new store name: ")
+            phone_number = input("Enter new phone number: ")
+            email = input("Enter new email: ")
+            address = input("Enter new address: ")
+            contact.update(store_name, phone_number, email, address)
+            print("Contact updated successfully!")
+            return
+    print("Contact not found.")
 
 def delete_contact():
-    contact_id = input("Enter the contact ID to delete: ")
+    contact_id = int(input("Enter the contact ID to delete: "))
     global contacts
-    contacts = [contact for contact in contacts if contact.id == contact_id]
+    contacts = [contact for contact in contacts if contact.id != contact_id]
     print("Contact deleted successfully!")
 
 def main():
